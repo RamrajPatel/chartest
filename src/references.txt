@@ -1,0 +1,48 @@
+$.ajax({
+                    type: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    url: "createGroup",
+                    data: JSON.stringify({
+                        'groupName': groupName,
+                        'description': description,
+                        'roleId'     : groupRole
+                    }),
+                    dataType: "json",
+                    success: function (data, status) {
+                        if (data['returnCode'] == '200') {
+                            $.each(data['Payload'], function(idx, item){
+                                var groupId = item['groupId'];
+                                selectedId = groupId;
+                            });
+
+                            listGroup();
+                            // intialise auto complte text box and group user table
+                            $('#searchInputGroupUser').val("");
+                            $('#groupSpecificUsersTable tbody tr').remove();
+
+                            $('#edit-group').modal('show');
+
+                            loadEditGroupSection();
+
+                            $('#editGroupTitle').html('Complete Group Creation');
+                            $('#editGroupNameModalEditGroup').val(groupName);
+                            $('#editGroupNameModalEditGroup').prop("readonly", true);
+                            $('#editGroupIdModalEditGroup').val(selectedId);
+                            $('#editGroupRoleNameModalEditGroup').empty();
+                            var stmt = "<option selected='' value=" + groupRole + ">" + groupRoleIdNameLookup[groupRole] + "</option>";
+                            $(stmt).appendTo('#editGroupRoleNameModalEditGroup');
+                            $('#editGroupRoleNameModalEditGroup').prop("readonly", true);
+                        } else {
+                            $('#responseErrorModal').modal('show');
+                            $('#responseErrorModalHeader').html('Group Creation');
+                            $('#responseErrorModalMessage').html('Failed with error:' + data['message']);
+                        }
+                    }, error: function (data, status) {
+                        $('#responseErrorModal').modal('show');
+                        $('#responseErrorModalHeader').html('Group Creation');
+                        $('#responseErrorModalMessage').html('Unexpected Server Exception, Error:' + data['message'] + ' Status:' + status);
+                    }
+                });

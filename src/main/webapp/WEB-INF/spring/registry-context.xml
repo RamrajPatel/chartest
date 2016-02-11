@@ -29,6 +29,7 @@
 				/resources/js/fusion/** = anon
 				/test = anon <!--TODO remove for test-->
 				/login = anon
+				/home = anon
 				/aboutUs = anon
 				/aboutCaseTracker = anon
 				/forgotPassword = anon

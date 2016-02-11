@@ -1,9 +1,9 @@
 package com.college.snmp;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -27,9 +27,25 @@ public class IndexController {
         return "settings";
     }
 
+    @RequestMapping(value="checkAjax", method = RequestMethod.POST)
+    public @ResponseBody
+    String post( @RequestBody JsonResponse response) {
+        System.out.println("receivejhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        String ip = response.getIp();
+        String community = response.getCommunity();
+        System.out.println(ip + community);
+        return ip+community;
+    }
+
+
+
     @RequestMapping(value = "administration", method = RequestMethod.GET)
     public String administration(@RequestParam String type){
         return type;
+    }
+    @RequestMapping(value = "home", method = RequestMethod.GET)
+    public String home(){
+        return "home";
     }
 
 }

@@ -23,7 +23,7 @@
 
     <!-- i18n -->
     <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <beans:property name="basename" value="/WEB-INF/i18n_en.properties"/>
+        <beans:property name="basename" value="i18n_en.properties"/>
         <beans:property name="defaultEncoding" value="UTF-8"/>
         <beans:property name="useCodeAsDefaultMessage" value="true"/>
     </beans:bean>
