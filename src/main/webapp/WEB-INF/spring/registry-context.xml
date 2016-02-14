@@ -30,6 +30,8 @@
 				/test = anon <!--TODO remove for test-->
 				/login = anon
 				/home = anon
+				/SNMP_UI=anon
+				/dataTables=anon
 				/aboutUs = anon
 				/aboutCaseTracker = anon
 				/forgotPassword = anon
